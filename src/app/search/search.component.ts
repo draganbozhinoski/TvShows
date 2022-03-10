@@ -28,20 +28,19 @@ export class SearchComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router
   ) {}
-
   ngOnInit(): void {
     this.searchField.valueChanges
-      .pipe(debounceTime(850), distinctUntilChanged())
+      .pipe(debounceTime(800), distinctUntilChanged())
       .subscribe((val) => this.search(val));
     this.changeParams();
-    if(this.param)
-    {
+    console.log(this.param)
+    if (this.param) {
       this.searchField.setValue(this.param);
       this.search(this.param);
     }
   }
   search(arg: string) {
-    if (arg != '') {
+    if (arg != '' && arg !== undefined) {
       this.service.getShows(arg).subscribe((data) => {
         this.shows = data.map((data) => data.show);
         this.router.navigate(['search'], { queryParams: { q: arg } });
