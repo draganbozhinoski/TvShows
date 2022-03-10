@@ -1,0 +1,33 @@
+<div class="container" *ngIf="show">
+    <a routerLink="/search"><h2 class="text-info">TVMaze API Demo</h2></a>
+    <h5 class="text-info">{{show.name}}</h5>
+    <div class="row">
+        <div class="col-3 thumb" *ngIf="show.image">
+            <img [src]="show.image['medium']" class="img-thumbnail test">
+        </div>
+        <div class="col-3 thumb" *ngIf="!show.image">
+            <img src="../../assets/images/default-movie-portrait.jpg" class="img-thumbnail test">
+        </div>
+        <div class="col-9">
+            <div *ngIf="show.summary" [innerHTML]="show.summary"></div>
+            <div *ngIf="!show.summary"> Summary comming soon... </div>
+            <div>Language: {{show.language}}</div> 
+            <div>Genres: {{show.genres}} </div>
+            <div>Status: {{show.status}} </div>
+            <div>Premiered: {{show.premiered}} </div>
+            <div *ngIf="show.officialSite">Official site: <a [href]="show.officialSite">{{show.officialSite}}</a></div>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-6">
+            <app-cast></app-cast>
+        </div>
+        <div class="col-6">
+            <h3>Episodes</h3>
+            <div *ngFor="let episode of episodes">
+                <strong>S{{episode.season}}E{{episode.number}} - {{episode.name}}</strong>
+            </div>
+        </div>
+    </div>
+</div>

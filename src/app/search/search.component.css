@@ -1,0 +1,16 @@
+.container{
+    max-width: 70%;
+}
+.thumb{
+    display:flex;
+}
+.slika{
+    margin:auto;
+}
+.backdiv:hover{
+    background-color: rgba(3, 138, 255,0.3);
+}
+a{
+    text-decoration: none;
+    color:inherit;
+}

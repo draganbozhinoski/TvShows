@@ -1,0 +1,24 @@
+<div class="container">
+    <a routerLink="/search"><h2 class="text-info">TVMaze API Demo</h2></a>
+    <div class="input-group">
+        <input [formControl]="searchField" type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+        <button type="button" class="btn btn-outline-primary">search</button>
+    </div>
+    <div *ngFor="let show of shows" class="border backdiv">
+        <a [routerLink]="['/shows/',show.id]">
+        <div class="row">
+            <div class="col-2 thumb" *ngIf="show.image">
+                <img [src]="show.image['medium']" class="img-thumbnail slika">
+            </div>
+            <div class="col-2 thumb" *ngIf="!show.image">
+                <img src="../../assets/images/default-movie-portrait.jpg" class="img-thumbnail slika">
+            </div>
+            <div class="col-10">
+                <h5> {{show.name}} </h5>
+                <div [innerHTML]="show.summary" *ngIf="show.summary"></div>
+                <div *ngIf="!show.summary">Summary coming soon...</div>
+            </div>
+        </div>
+    </a>
+    </div>
+</div>
