@@ -10,7 +10,7 @@
 .backdiv:hover{
     background-color: rgba(3, 138, 255,0.3);
 }
-a{
+.aHead{
     text-decoration: none;
     color:inherit;
 }

@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CastComponent } from './cast/cast.component';
 import { DetailsComponent } from './details/details.component';
 import { SearchComponent } from './search/search.component';
 

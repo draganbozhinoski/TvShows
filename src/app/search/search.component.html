@@ -1,22 +1,25 @@
 <div class="container">
-    <a routerLink="/search"><h2 class="text-info">TVMaze API Demo</h2></a>
     <div class="input-group">
-        <input [formControl]="searchField" type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
-        <button type="button" class="btn btn-outline-primary">search</button>
+        <input (keydown.enter)="doSearch()" [formControl]="searchField" type="search" class="form-control rounded" placeholder="Start searching by typing here.. " aria-label="Search" aria-describedby="search-addon" />
+        <button type="button" class="btn btn-outline-primary" (click)="doSearch()">search</button>
     </div>
-    <div *ngFor="let show of shows" class="border backdiv">
-        <a [routerLink]="['/shows/',show.id]">
+    <div *ngFor="let scoreShow of scoreShows" class="border backdiv">
+        <a class="aHead" [routerLink]="['/shows/',scoreShow.show.id]">
         <div class="row">
-            <div class="col-2 thumb" *ngIf="show.image">
-                <img [src]="show.image['medium']" class="img-thumbnail slika">
+            <div class="col-2 thumb" *ngIf="scoreShow.show.image">
+                <img [src]="scoreShow.show.image['medium']" class="img-thumbnail slika">
             </div>
-            <div class="col-2 thumb" *ngIf="!show.image">
+            <div class="col-2 thumb" *ngIf="!scoreShow.show.image">
                 <img src="../../assets/images/default-movie-portrait.jpg" class="img-thumbnail slika">
             </div>
-            <div class="col-10">
-                <h5> {{show.name}} </h5>
-                <div [innerHTML]="show.summary" *ngIf="show.summary"></div>
-                <div *ngIf="!show.summary">Summary coming soon...</div>
+            <div class="col-8">
+                <h5> {{scoreShow.show.name}} </h5>
+                <div [innerHTML]="scoreShow.show.summary" *ngIf="scoreShow.show.summary"></div>
+                <div *ngIf="!scoreShow.show.summary">Summary coming soon...</div>
+                <div class="text-secondary">{{scoreShow.show.genres | splitter:' | '}}</div>
+            </div>
+            <div class="col-2 text-secondary">
+                {{scoreShow.score}}
             </div>
         </div>
     </a>

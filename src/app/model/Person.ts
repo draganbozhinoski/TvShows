@@ -1,3 +1,4 @@
 export interface Person{
-    person:any;
+    name:string;
+    image:any;
 }

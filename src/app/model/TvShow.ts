@@ -11,4 +11,5 @@ export interface TvShow{
     summary:string;
     officialSite:string;
     _embedded:any;
+    score:number;
 }

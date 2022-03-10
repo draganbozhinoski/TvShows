@@ -3,6 +3,7 @@ import { FormControl } from '@angular/forms';
 import {
   debounce,
   debounceTime,
+  delay,
   distinctUntilChanged,
   Observable,
   of,
@@ -12,6 +13,7 @@ import {
 import { TvShow } from '../model/TvShow';
 import { TvshowService } from '../tvshow.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ScoreShow } from '../model/ScoreShow';
 
 @Component({
   selector: 'app-search',
@@ -19,9 +21,11 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./search.component.css'],
 })
 export class SearchComponent implements OnInit {
-  shows: TvShow[] = [];
+  scoreShows: ScoreShow[] = [];
   searchField = new FormControl();
   param = '';
+  load = true;
+  score = 0;
 
   constructor(
     private service: TvshowService,
@@ -33,16 +37,15 @@ export class SearchComponent implements OnInit {
       .pipe(debounceTime(800), distinctUntilChanged())
       .subscribe((val) => this.search(val));
     this.changeParams();
-    console.log(this.param)
     if (this.param) {
       this.searchField.setValue(this.param);
-      this.search(this.param);
     }
   }
   search(arg: string) {
     if (arg != '' && arg !== undefined) {
       this.service.getShows(arg).subscribe((data) => {
-        this.shows = data.map((data) => data.show);
+        this.scoreShows = data;
+        this.load = false;
         this.router.navigate(['search'], { queryParams: { q: arg } });
       });
       this.changeParams();
@@ -52,5 +55,8 @@ export class SearchComponent implements OnInit {
     this.route.queryParams.subscribe((param) => {
       this.param = param['q'];
     });
+  }
+  doSearch() {
+    this.search(this.searchField.value);
   }
 }

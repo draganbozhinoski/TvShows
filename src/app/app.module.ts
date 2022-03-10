@@ -7,14 +7,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SearchComponent } from './search/search.component';
 import { DetailsComponent } from './details/details.component';
-import { CastComponent } from './cast/cast.component';
+import { SplitterPipe } from './splitter.pipe';
+import { MissingPipe } from './missing.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     SearchComponent,
     DetailsComponent,
-    CastComponent
+    SplitterPipe,
+    MissingPipe
     ],
   imports: [
     BrowserModule,
